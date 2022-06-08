@@ -42,6 +42,9 @@ body {
     font-weight: bold;
 }
 
+span.custom-tab {
+    margin-left: 3em;
+}
 
 /*header section*/
 .hero_area {
@@ -321,7 +324,6 @@ a:focus {
 }
 
 .about_section p, .partners_section p {
-    margin-top: 45px;
     text-align: justify;
 }
 
@@ -341,7 +343,9 @@ a:focus {
     font-family: "Poppins", sans-serif;
 }
 
-.aspects_section .custom_heading-container {
+.aspects_section .custom_heading-container,
+.partners_section .custom_heading-container,
+.about_section .custom_heading-container{
     align-self: center;
     padding-bottom: 45px;
 }
@@ -439,6 +443,20 @@ a:focus {
     background-color: transparent;
     color: #000000;
 }
+.aspects_section ul {
+    list-style: none; /* Remove default bullets */
+}
+
+.aspects_section ul li::before {
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: #ffffff; /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+    position: relative;
+    top: 1.5em;
+}
 
 .partners_section {
     font-family: "Poppins", sans-serif;
@@ -528,6 +546,9 @@ a:focus {
     position: relative;
     display: flex;
     flex-direction: column;
+}
+.contact_items img{
+    height: 2em;
 }
 
 .info_section {
