@@ -329,20 +329,23 @@
         <div class="layout_padding2-bottom">
             <div class="row">
                 <div class="col-md-7">
-                    <form action="mailto:desk@hypertech.gr" method="post" enctype="text/plain">
+                    <form method="post" onsubmit="return submitContactForm()" role="form">
+
                         <div class="contact_form-container">
                             <div>
                                 <div>
-                                    <input placeholder="Name" type="text">
+                                    <input id="name_input" placeholder="Name" type="text">
                                 </div>
                                 <div>
-                                    <input placeholder="Email" type="email">
+                                    <input id="phone_input" placeholder="Phone Number" type="text">
                                 </div>
                                 <div>
-                                    <input placeholder="Phone Number" type="text">
+                                    <input id="message_input" placeholder="Message" type="text">
                                 </div>
-                                <div class="">
-                                    <input class="message_input" placeholder="Message" type="text">
+                                <div class="form-group">
+                                    <div class="g-recaptcha" data-sitekey="6LcQ_1sgAAAAABDKvuVvhfLh6r5rEt3-xRs0oLnU"
+                                         data-callback="verifyCaptcha"></div>
+                                    <div id="g-recaptcha-error"></div>
                                 </div>
                                 <div class="mt-5">
                                     <button type="submit">
@@ -406,6 +409,27 @@
 
 <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.js" type="text/javascript"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+    let recaptcha_response = '';
+
+    function submitContactForm() {
+        if (recaptcha_response.length == 0) {
+            document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">Please complete captcha.</span>';
+            return false;
+        }
+        let subject = encodeURIComponent("new Dronews contact request");
+        let body = `\r\nName: ${document.getElementById('name_input').value}\r\nPhone: ${document.getElementById('phone_input').value}\r\nMessage: ${document.getElementById('message_input').value}`
+        let link = "mailto:desk@hypertech.gr" + "&subject=" + subject + "&body=" + encodeURIComponent(body);
+        window.location.href = link;
+    }
+
+    function verifyCaptcha(token) {
+        recaptcha_response = token;
+        document.getElementById('g-recaptcha-error').innerHTML = '';
+    }
+
+</script>
 
 </body>
 </body>
